@@ -35,8 +35,10 @@ namespace mydotnetapp
                     var name = context.Request.Query["name"];
                     if(String.IsNullOrEmpty(name))
                         name = "Foo";
-
-                    await context.Response.WriteAsync("Hello World! " + name);
+                    var greeting = Environment.GetEnvironmentVariable("Greeting");
+                    if(String.IsNullOrEmpty(greeting))
+                        greeting = "Hello World!";
+                    await context.Response.WriteAsync(greeting + " " + name);
                 });
             });
         }
